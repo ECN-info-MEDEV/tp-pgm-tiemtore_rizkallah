@@ -117,9 +117,30 @@ public class pgm {
             throw new Exception("ERROR: cannot write .pgm file " + path);
         }
     }
-
+    
     public void histogramme(){
-        
+ 
+        int m = this.getHeight();
+        int n = this.getWidth();
+        int pixels = m*n;
+        int[] histogram = new int[256];
+        StdDraw.setPenColor(StdDraw.BOOK_BLUE);
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                int intensity = (int) a[i][j];
+                histogram[intensity]++;
+            }
+        }
+        StdDraw.setXscale(0,256);
+        StdDraw.setYscale(0,pixels/20); // obtained "20" by experimentation
+        StdDraw.enableDoubleBuffering();
+        for (int i = 0; i < 256; i++)
+        {
+            StdDraw.filledRectangle(i+0.5,histogram[i]/2,0.5,histogram[i]/2);
+        }
+        StdDraw.show();
     }
 
     public static void main(String[] args) throws Exception {
