@@ -65,14 +65,16 @@ public class pgm {
         int width;
         int height;
         int valmax;
+        Scanner in;
         try {
-            Scanner in = new Scanner(new File(path));
+            in = new Scanner(new File(path));
             String magic = in.next();
             if (!magic.equals("P2")) {
                 in.close();
                 throw new Exception("ERROR: cannot read .pgm file " + path);
             }
-            width  = in.nextInt();
+            String sharp  = in.next();
+            width = in.nextInt();
             height = in.nextInt();
             valmax = in.nextInt();
             image = new int[height][width];
@@ -106,6 +108,7 @@ public class pgm {
         try {
             PrintStream output = new PrintStream(new FileOutputStream(path));
             output.println("P2");
+            output.println("#");
             output.println(width + " " + height);
             output.println(VALMAX);
             for (int row = 0; row < height; row++)
@@ -120,8 +123,8 @@ public class pgm {
 
     public static void main(String[] args) throws Exception {
         pgm file = new pgm();
-        String path_to_read = "a";
-        String path_to_write = "";
+        String path_to_read = "./files/baboon.pgm";
+        String path_to_write = "./files/baboon_copy.pgm";
         int[][] img = file.readPGM(path_to_read);
         file.writePGM(path_to_write, img);
     }
