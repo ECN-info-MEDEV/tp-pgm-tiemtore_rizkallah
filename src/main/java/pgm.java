@@ -119,6 +119,32 @@ public class pgm {
             throw new Exception("ERROR: cannot write .pgm file " + path);
         }
     }
+    
+    
+    public int[][] seulliage(int seuilMin,int seuilMax)
+         
+    {
+        int[][] imageSeuil= new int[this.getHeight()][this.getWidth()];
+        for (int j = 0; j < this.getHeight(); j++)
+        {
+             for (int i = 0; i < this.getWidth(); i++)
+                {
+                    if(this.image[j][i]>=seuilMin && this.image[j][i]<=seuilMax)
+                    {
+                        imageSeuil[j][i]=255;
+                    }
+                    else
+                    {
+                        imageSeuil[j][i]=0;
+                    }
+                    
+                }
+        
+            
+        }
+        return imageSeuil;
+               
+    }
 
 
     public static void main(String[] args) throws Exception {
@@ -128,4 +154,6 @@ public class pgm {
         int[][] img = file.readPGM(path_to_read);
         file.writePGM(path_to_write, img);
     }
+    
+    
 }
