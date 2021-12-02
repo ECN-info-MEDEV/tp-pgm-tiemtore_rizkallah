@@ -57,10 +57,9 @@ public class pgm {
     /**
      * Read PGM image file from a specific path and scale to 0-255 if needed
      * @param path to a PGM image
-     * @return image (matrix of pixels)
      * @throws Exception if we couldn't read the PGM file from the specific path
      */
-    public int[][] readPGM(String path) throws Exception {
+    public void readPGM(String path) throws Exception {
 
         int width;
         int height;
@@ -92,7 +91,6 @@ public class pgm {
                 for (int i = 0; i < width; i++)
                     image[j][i] = (image[j][i] * VALMAX) / valmax;
 
-        return image;
     }
 
     /**
@@ -120,12 +118,15 @@ public class pgm {
         }
     }
 
+    public void histogramme(){
+        
+    }
 
     public static void main(String[] args) throws Exception {
         pgm file = new pgm();
         String path_to_read = "./files/baboon.pgm";
         String path_to_write = "./files/baboon_copy.pgm";
-        int[][] img = file.readPGM(path_to_read);
-        file.writePGM(path_to_write, img);
+        file.readPGM(path_to_read);
+        file.writePGM(path_to_write, file.image);
     }
 }
