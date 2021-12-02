@@ -120,7 +120,7 @@ public class pgm {
 
     public static void main(String[] args) throws Exception {
         pgm file = new pgm();
-        String path_to_read = "";
+        String path_to_read = "a";
         String path_to_write = "";
         int[][] img = file.readPGM(path_to_read);
         file.writePGM(path_to_write, img);
