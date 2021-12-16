@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import static java.lang.Math.abs;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,16 @@ import java.util.Scanner;
  * @author r_rizkallah
  */
 public class pgm {
- 
+
+    public pgm(int[][] image) {
+        this.image = image;
+    }
+    public pgm()
+    {
+   
+    }
+    
+    
     // Maximum Grey Value
     public static final int VALMAX = 255;
 
@@ -119,9 +129,14 @@ public class pgm {
             throw new Exception("ERROR: cannot write .pgm file " + path);
         }
     }
+   /**
+    * 
+    * @param seuilMin
+    * @param seuilMax
+    * @return 
+    */ 
     
-    
-    public int[][] seulliage(int seuilMin,int seuilMax)
+    public int[][] seuilliage(int seuilMin,int seuilMax)
          
     {
         int[][] imageSeuil= new int[this.getHeight()][this.getWidth()];
@@ -145,14 +160,37 @@ public class pgm {
         return imageSeuil;
                
     }
+    
+    
+    
+    public int [] []diffImage(int[][] img1,int[][] img2)
+    {
+        int[][] imagediff= new int[this.getHeight()][this.getWidth()];
+        
+        for (int j = 0; j < this.getHeight(); j++)
+        {
+             for (int i = 0; i < this.getWidth(); i++)
+                {
+                    imagediff[i][j]=abs(img1[i][j]-img2[i][j]);
+                }
+        }
+        return imagediff;
+    }
 
 
     public static void main(String[] args) throws Exception {
-        pgm file = new pgm();
+//        pgm file = new pgm(); 
+//        String path_to_read = "./files/baboon.pgm";
+//        String path_to_write = "./files/baboon_copy.pgm";
+//        int[][] img = file.readPGM(path_to_read);
+//        file.writePGM(path_to_write, img);
+        
+        pgm file2= new pgm();
         String path_to_read = "./files/baboon.pgm";
-        String path_to_write = "./files/baboon_copy.pgm";
-        int[][] img = file.readPGM(path_to_read);
-        file.writePGM(path_to_write, img);
+        String path_to_write2 = "./files/baboon_seuil_copy.pgm";
+        int[][] img = file2.readPGM(path_to_read);
+        int[][] imageseuil=file2.seuilliage(0, 255);
+        file2.writePGM(path_to_write2, imageseuil);
     }
     
     
